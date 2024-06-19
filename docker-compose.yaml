@@ -1,0 +1,17 @@
+services:
+  pubsub-emulator:
+    image: google/cloud-sdk:emulators
+    platform: linux/amd64
+    ports:
+      - "8085:8085"
+    command: >
+      /bin/bash -c "gcloud beta emulators pubsub start --project=some-project-id --host-port=0.0.0.0:8085"
+    environment:
+      - PUBSUB_PROJECT_ID=some-project-id
+
+  sonarqube:
+    image: sonarqube:community
+    ports:
+      - "9000:9000"
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
